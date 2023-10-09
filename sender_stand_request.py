@@ -1,31 +1,25 @@
 
-import configuration
+
 import requests
+import configuration
 import data
 
-def post_new_user():
-    respuesta = requests.post(configuration.URL_SERVICE + configuration.USER_ENDPOINT, json=data.user_body)
-    respuesta_json = respuesta.json()
-    return respuesta_json['authToken']
+def obtener_token():
+    respuesta = requests.post(configuration.URL_SERVICE + configuration.USER_ENDPOINT,
+                              json=data.user)
+    resp_json = respuesta.json()
+    return resp_json['authToken']
 
-def get_new_user_token():
-    auth_token = post_new_user()
-    authorization = {
-        "Content-Type": "application/json",
-        "Authorization": f'Bearer {auth_token}'
-    }
-    return authorization
+auth_token = obtener_token()
+data.authorization["Authorization"] = f'Bearer {auth_token}'
 
-authorization_header = get_new_user_token()
-print(authorization_header)
 
-def post_new_client_kit(name):
-    respuesta= requests.post(configuration.URL_SERVICE + configuration.KIT_ENDPOINT,
-                             json=name,
-                             headers=authorization_header
-                             )
+def crear_kit(name):
+
+    respuesta = requests.post(configuration.URL_SERVICE + configuration.KIT_ENDPOINT,
+                              json=name,
+                              headers=data.authorization)
     return respuesta
-
 
 
 

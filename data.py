@@ -1,5 +1,6 @@
 
-user_body = {
+
+user = {
     "firstName": "Andrea",
     "phone": "+11234567890",
     "address": "123 Elm Street, Hilltop"
@@ -17,5 +18,9 @@ kit_body = {
     "prueba8": {},
     "prueba9": {"name": 123},
     }
+authorization = {
+        "Content-Type": "application/json",
+        "Authorization": ""
+}
 
 
